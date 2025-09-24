@@ -3,7 +3,6 @@ package com.dicipline.SystemUser.Resources;
 import java.net.URI;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,30 +15,27 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.dicipline.SystemUser.Entities.DataUser;
-import com.dicipline.SystemUser.Services.DataUserFactory;
 import com.dicipline.SystemUser.Services.DataUserService;
 
 @RestController
 @RequestMapping("/datas")
 public class DataUserResource {
 
-	@Autowired
-	private DataUserFactory factory;
-
-	@Autowired
-	DataUserService repository;
+	private final DataUserService repository;
+	
+	public DataUserResource(DataUserService repository) {
+		this.repository = repository;
+	}
 
 	@GetMapping
 	private ResponseEntity<List<DataUser>> findAll() {
-		List<DataUser> listUser = repository.findAll();
-		return ResponseEntity.ok().body(listUser);
+		List<DataUser> dUsers = repository.findAll();
+		return ResponseEntity.ok().body(dUsers);
 	}
 
 	@PostMapping
 	public ResponseEntity<DataUser> insert(@RequestBody DataUser dataU) {
 		dataU = repository.insert(dataU);
-		dataU = factory.createLocalization(dataU);
-
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dataU.getId()).toUri();
 		return ResponseEntity.created(uri).body(dataU);
 	}

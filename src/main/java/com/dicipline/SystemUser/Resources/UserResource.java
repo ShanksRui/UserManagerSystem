@@ -3,7 +3,6 @@ package com.dicipline.SystemUser.Resources;
 import java.net.URI;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +21,12 @@ import com.dicipline.SystemUser.Services.UserService;
 @RequestMapping("/users")
 public class UserResource {
 
-	@Autowired
-	private UserService repository;
+
+	private final UserService repository;
+	
+	public UserResource(UserService repository) {
+		this.repository = repository;
+	}
 
 	@GetMapping
 	private ResponseEntity<List<User>> findAll() {

@@ -5,8 +5,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Objects;
 
-import com.dicipline.SystemUser.Services.DataUserFactory;
-
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,8 +24,6 @@ public class DataUser implements Serializable {
     
     @Transient
     private String cep;
-    
-    private DataUserFactory factory;
     
     private String systemOperational;
     
