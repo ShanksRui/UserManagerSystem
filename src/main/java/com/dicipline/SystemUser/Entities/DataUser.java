@@ -45,6 +45,8 @@ public class DataUser implements Serializable {
        
     public DataUser() {}
     
+    
+    
     public DataUser(Long id, String systemOperational, String cep, Instant login, Instant loginClosed, User user,Duration duration) {
         this.id = id;
         this.systemOperational = 	systemOperational;
@@ -55,8 +57,7 @@ public class DataUser implements Serializable {
         this.duration = duration;
     }
      
-      public Duration getDuration() {
-    	  if(login != null && loginClosed != null) return duration = Duration.between(login, loginClosed);
+      public Duration getDuration() {  
 		  return duration;
       }
       

@@ -9,8 +9,10 @@ public class CepService {
     
     private final WebClient webclient;	
     
-    public CepService(WebClient webclient) {
-        this.webclient = webclient;
+    public CepService(WebClient.Builder builder) {
+        this.webclient = builder.
+        		baseUrl("https://viacep.com.br/ws").
+        		build();
     }
     
     public Localization buscarCep(String cep) {
@@ -25,7 +27,7 @@ public class CepService {
         }
         
         Localization localization = webclient.get()
-            .uri("https://viacep.com.br/ws/{cep}/json", cepLimpo)
+            .uri("/{cep}/json", cepLimpo)
             .retrieve()
             .bodyToMono(Localization.class)
             .block();
