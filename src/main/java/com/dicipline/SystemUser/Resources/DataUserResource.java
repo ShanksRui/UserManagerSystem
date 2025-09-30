@@ -32,6 +32,12 @@ public class DataUserResource {
 		List<DataUser> dUsers = repository.findAll();
 		return ResponseEntity.ok().body(dUsers);
 	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<DataUser> findById(@PathVariable Long id) {
+		DataUser du = repository.findById(id);
+		return ResponseEntity.ok(du);
+	}
 
 	@PostMapping
 	public ResponseEntity<DataUser> insert(@RequestBody DataUser dataU) {

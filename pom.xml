@@ -3,11 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.6</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.3.4</version> <!-- em vez de 3.5.6 -->
+  </parent>
 	<groupId>com.dicipline</groupId>
 	<artifactId>SystemUser</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -30,37 +29,53 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+	
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+	    <!-- Spring MVC (Web) -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-web</artifactId>
+	    </dependency>
 
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-data-jpa</artifactId>
-     </dependency>
+	    <!-- WebClient (pode ser usado no MVC) -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-webflux</artifactId>
+	    </dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-webflux</artifactId>
-    </dependency>
+	    <!-- SpringDoc OpenAPI (para Swagger UI) -->
+	    <dependency>
+	        <groupId>org.springdoc</groupId>
+	        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+	        <version>2.6.0</version>
+	    </dependency>
 
+	    <!-- JPA (persistência com Postgres/H2) -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-data-jpa</artifactId>
+	    </dependency>
+
+	    <!-- Banco de dados PostgreSQL -->
+	    <dependency>
+	        <groupId>org.postgresql</groupId>
+	        <artifactId>postgresql</artifactId>
+	        <scope>runtime</scope>
+	    </dependency>
+
+	    <!-- Banco de dados em memória (útil para testes) -->
+	    <dependency>
+	        <groupId>com.h2database</groupId>
+	        <artifactId>h2</artifactId>
+	        <scope>runtime</scope>
+	    </dependency>
+
+	    <!-- Testes -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-test</artifactId>
+	        <scope>test</scope>
+	    </dependency>
 	</dependencies>
 
 	<build>
@@ -71,5 +86,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

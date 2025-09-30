@@ -15,24 +15,23 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class DataUserService {
-
    
    private final DataUserRepository repository;
    
    private final DataUserFactory factory;
    
-   public DataUserService(DataUserFactory factory,DataUserRepository repository) {
+   public DataUserService(DataUserFactory factory,DataUserRepository repository ) {
 	   this.factory = factory;
 	   this.repository = repository;
    }
     
     public List<DataUser> findAll() {
-        return this.repository.findAll();
+        return repository.findAll();
     }
     
     public DataUser findById(Long id) {
-        Optional<DataUser> obj = this.repository.findById(id);
-        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+    	 Optional<DataUser> obj = repository.findById(id);
+         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
     
     public DataUser insert(DataUser dataUser) {
@@ -41,10 +40,10 @@ public class DataUserService {
     }
     
     public void delete(Long id) {
-        if (!this.repository.existsById(id))
+        if (!repository.existsById(id))
             throw new ResourceNotFoundException(id);
         try {
-            this.repository.deleteById(id);
+            repository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
             throw new DataErrorException(e.getMessage());
         }
@@ -52,9 +51,9 @@ public class DataUserService {
     
     public DataUser update(Long id, DataUser du) {
         try {
-            DataUser entity = this.repository.getReferenceById(id);
+            DataUser entity = repository.getReferenceById(id);
             dataUpdate(entity, du);
-            return this.repository.save(entity);
+            return repository.save(entity);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }

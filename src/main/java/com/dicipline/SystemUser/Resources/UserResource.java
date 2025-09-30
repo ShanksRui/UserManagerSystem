@@ -21,7 +21,6 @@ import com.dicipline.SystemUser.Services.UserService;
 @RequestMapping("/users")
 public class UserResource {
 
-
 	private final UserService repository;
 	
 	public UserResource(UserService repository) {

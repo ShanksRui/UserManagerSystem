@@ -4,6 +4,7 @@ import java.time.Instant;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -16,7 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class ResourceExceptionHandler {
   
 	    @ExceptionHandler(ResourceNotFoundException.class)
-	    public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request) {
+	    public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, ServerHttpRequest request) {
 	        String erro = "Resource not Found";
 	        HttpStatus status = HttpStatus.NOT_FOUND;
 	        StandardError stdError = new StandardError(
@@ -24,8 +25,8 @@ public class ResourceExceptionHandler {
 	            status.value(), 
 	            e.getMessage(), 
 	            erro, 
-	            request.getRequestURI()
-	        );
+	            request.getURI().getPath());
+	        
 	        return ResponseEntity.status(status).body(stdError);
 	    }
 	    

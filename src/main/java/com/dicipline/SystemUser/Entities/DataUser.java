@@ -5,6 +5,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Transient;
 
 @Entity
@@ -37,25 +40,38 @@ public class DataUser implements Serializable {
     private Instant login;
     private Instant loginClosed;
     
-    @Transient
+    @Column(name = "duration")
     private Duration duration;
-    
+       
     public DataUser() {}
     
-    public DataUser(Long id, String systemOperational, String cep, Instant login, Instant loginClosed, User user) {
+    public DataUser(Long id, String systemOperational, String cep, Instant login, Instant loginClosed, User user,Duration duration) {
         this.id = id;
-        this.systemOperational = systemOperational;
+        this.systemOperational = 	systemOperational;
         this.localization.setCep(cep);
         this.login = login;
         this.loginClosed = loginClosed;
         this.user = user;
+        this.duration = duration;
     }
+     
+      public Duration getDuration() {
+    	  if(login != null && loginClosed != null) return duration = Duration.between(login, loginClosed);
+		  return duration;
+      }
+      
+      @PrePersist
+      @PreUpdate
+      private void calculateDuration() {
+          if (login != null && loginClosed != null) {
+              this.duration = Duration.between(login, loginClosed);
+          }
+      }
     
-    @Transient
-    public Duration getTimeOnAcess() {
-        return null;
-    }
-    
+      public void setDuration(Duration duration) {
+    	this.duration = duration;
+    	
+     }    
     public String getCep() {
         return this.cep;
     }
@@ -120,4 +136,6 @@ public class DataUser implements Serializable {
         DataUser other = (DataUser) obj;
         return Objects.equals(id, other.id);
     }
+
+	
 }

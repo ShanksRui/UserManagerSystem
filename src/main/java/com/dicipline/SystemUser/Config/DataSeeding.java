@@ -12,7 +12,7 @@ import com.dicipline.SystemUser.Entities.User;
 import com.dicipline.SystemUser.Repositories.DataUserRepository;
 import com.dicipline.SystemUser.Repositories.UserRepository;
 @Configuration
-@Profile({"test"})
+@Profile({"prod"})
 public class DataSeeding implements CommandLineRunner {
 	     
 	    @Autowired
@@ -21,11 +21,11 @@ public class DataSeeding implements CommandLineRunner {
 	    private DataUserRepository dataUserRepository;
 	
 	     public void run(String... args) throws Exception {
-	     User u1 = new User(null, "Alice Silva", "12345", LocalDate.of(2000, 5, 14));
-	     DataUser du = new DataUser(null, "Windows", "01001000", Instant.parse("2025-09-07T15:30:00Z"), Instant.parse("2025-09-15T23:30:00Z"), u1);
+	     //User u1 = new User(null, "Alice Silva", "12345", LocalDate.of(2000, 5, 14));
+	    // DataUser du = new DataUser(null, "Windows", "01001000", Instant.parse("2025-09-07T15:30:00Z"), Instant.parse("2025-09-15T23:30:00Z"), u1);
         
-	     userRepository.save(u1);
-	     dataUserRepository.save(du);
+	     //userRepository.save(u1);
+	     //dataUserRepository.save(du);
 	  }
 	
 }
