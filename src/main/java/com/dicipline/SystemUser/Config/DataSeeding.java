@@ -24,7 +24,7 @@ public class DataSeeding implements CommandLineRunner {
 	     User u1 = new User(null, "Alice Silva", "12345", LocalDate.of(2000, 5, 14));
 	     DataUser du = new DataUser(null, "Windows", "01001000", Instant.parse("2025-09-07T15:30:00Z"), Instant.parse("2025-09-15T23:30:00Z"), u1);
         
-	     userRepository.save(u1);
+	      userRepository.save(u1);
 	      dataUserRepository.save(du);
 	  }
 	

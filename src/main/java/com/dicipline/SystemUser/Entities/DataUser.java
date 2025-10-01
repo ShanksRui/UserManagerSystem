@@ -53,7 +53,6 @@ public class DataUser implements Serializable {
         this.localization.setCep(cep);
         this.login = login;
         this.localization.setCep(cep);
-
         this.loginClosed = loginClosed;
         this.user = user;
     }
@@ -61,7 +60,7 @@ public class DataUser implements Serializable {
     @Autowired
     public DataUser(Long id, String systemOperational, String cep, Instant login, Instant loginClosed, User user,Duration duration) {
         this.id = id;
-        this.systemOperational = 	systemOperational;
+        this.systemOperational = systemOperational;
         this.localization.setCep(cep);
         this.login = login;
         this.loginClosed = loginClosed;
