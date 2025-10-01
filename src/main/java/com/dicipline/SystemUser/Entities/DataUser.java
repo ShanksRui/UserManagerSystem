@@ -5,6 +5,8 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Objects;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -45,8 +47,18 @@ public class DataUser implements Serializable {
        
     public DataUser() {}
     
+    public DataUser(Long id, String systemOperational, String cep, Instant login, Instant loginClosed, User user) {
+        this.id = id;
+        this.systemOperational = 	systemOperational;
+        this.localization.setCep(cep);
+        this.login = login;
+        this.localization.setCep(cep);
+
+        this.loginClosed = loginClosed;
+        this.user = user;
+    }
     
-    
+    @Autowired
     public DataUser(Long id, String systemOperational, String cep, Instant login, Instant loginClosed, User user,Duration duration) {
         this.id = id;
         this.systemOperational = 	systemOperational;
